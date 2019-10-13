@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="utf-8">
+    <title>Funkcja kwadratowa</title>
+    <style type="text/css">
+        .wrapper {
+            display: flex;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            flex-wrap: nowrap;
+            width: 1100px;
+            height: 800px;
+        }
+
+        .wrapper>.bar {
+            height: 800px;
+            width: 550px;
+            margin-top: 20px;
+            text-align: center;
+            display: block;
+        }
+
+        .box {
+            border: 1px solid #555;
+        }
+
+        input[type="text"] {
+            height: 20px;
+            padding-left: 5px;
+            outline: none;
+            border-radius: 3px;
+            border: 1px solid black;
+            text-align: center
+        }
+
+        input[type="button"] {
+            height: 20px;
+            background: #ddd;
+            outline: none;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+
+        .m0 {
+            position: relative;
+            top: 30%;
+            transform: translateY(-50%);
+            width: 500px;
+            height: 60px;
+            border: 1px solid #aaa;
+            margin-top: 30px;
+            line-height: 60px;
+            border-radius: 10px;
+            text-align: center;
+            font-family: helvetica;
+            font-size: 30px;
+            color: #777;
+            user-select: none;
+        }
+
+        .m0:first-child {
+            margin-top: 0;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="bar">
+            <svg width="501" height="501" style="background:#eee;" class="box">
+       <path d="" class="graph"></path>
+        <g class="OX">
+            <line x1="250" y1="0" x2="250" y2="501" style="stroke:#555;stroke-width:1;"></line>
+            <line x1="50" y1="240" x2="50" y2="260" style="stroke:#555; stroke-width:1;"></line>
+            <line x1="100" y1="240" x2="100" y2="260" style="stroke:#555; stroke-width:1;"></line>
+            <line x1="150" y1="240" x2="150" y2="260" style="stroke:#555; stroke-width:1;"></line>
+            <line x1="200" y1="240" x2="200" y2="260" style="stroke:#555; stroke-width:1;"></line>
+            <line x1="300" y1="240" x2="300" y2="260" style="stroke:#555; stroke-width:1;"></line>
+            <line x1="350" y1="240" x2="350" y2="260" style="stroke:#555; stroke-width:1;"></line>
+            <line x1="400" y1="240" x2="400" y2="260" style="stroke:#555; stroke-width:1;"></line>
+            <line x1="450" y1="240" x2="450" y2="260" style="stroke:#555; stroke-width:1;"></line>
+        </g>
+        <g class="OY">
+            <line x1="0" y1="250" x2="501" y2="250" style="stroke:#555;stroke-width:1;"></line>
+            <line x1="240" y1="50" x2="260" y2="50" style="stroke:#555; stroke-width:1;"></line>
+            <line x1="240" y1="100" x2="260" y2="100" style="stroke:#555; stroke-width:1;"></line>
+            <line x1="240" y1="150" x2="260" y2="150" style="stroke:#555; stroke-width:1;"></line>
+            <line x1="240" y1="200" x2="260" y2="200" style="stroke:#555; stroke-width:1;"></line>
+            <line x1="240" y1="300" x2="260" y2="300" style="stroke:#555; stroke-width:1;"></line>
+            <line x1="240" y1="350" x2="260" y2="350" style="stroke:#555; stroke-width:1;"></line>
+            <line x1="240" y1="400" x2="260" y2="400" style="stroke:#555; stroke-width:1;"></line>
+            <line x1="240" y1="450" x2="260" y2="450" style="stroke:#555; stroke-width:1;"></line>
+        </g>
+    </svg>
+            <form class="form">
+                <p><input type="text" class="a" placeholder="a"></p>
+                <p><input type="text" class="b" placeholder="b"></p>
+                <p><input type="text" class="c" placeholder="c"></p>
+                <p><input type="text" class="other" placeholder="other function"></p>
+                <p><input type="button" class='send' value="Draw a graph"></p>
+            </form>
+        </div>
+        <div class="bar">
+            <div class="m0 x1">Pierwsze miejsce zerowe</div>
+            <div class="m0 x2">Drugie miejsce zerowe</div>
+        </div>
+    </div>
+    <script>
+        var svg = document.querySelector('.box'),
+            graph = document.querySelector('.graph'),
+            send = document.querySelector('.send'),
+            x = 0;
+
+
+
+
+        function calculate() {
+            var a = parseFloat(document.querySelector('.a').value),
+                b = parseFloat(document.querySelector('.b').value),
+                c = parseFloat(document.querySelector('.c').value),
+                other = document.querySelector('.other').value,
+                points = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5],
+                coords = [],
+                x1 = document.querySelector('.x1'),
+                x2 = document.querySelector('.x2');
+            console.log(x1);
+            if (a == null || isNaN(a)) {
+                a = 0;
+            }
+            if (b == null || isNaN(b)) {
+                b = 0;
+            }
+            if (c == null || isNaN(c)) {
+                c = 0;
+            }
+            var delta = Math.pow(b, 2) - (4 * a * c);
+            for (var i = 0; i < points.length; i++) {
+                var y = -(((a * Math.pow(points[i], 2)) + (b * points[i]) - 5));
+                coords.push(y);
+                console.log(y);
+                //console.log(coords);
+                //console.log(point.x + ' ' + point.y);
+            }
+            if (a !== 0) {
+                graph.setAttribute('d', "M 0 " + (coords[0] * 50 - c * 50) + ' Q 250 ' + ((-coords[0] * 50 - c * 50) + 250 * b + 500) + ' 500 ' + (coords[10] * 50 - c * 50) + 'Z');
+            } else {
+                graph.setAttribute('d', "M 0 " + (coords[0] * 50 - c * 50) + ' L500 ' + (coords[10] * 50 - c * 50) + 'Z');
+            }
+            graph.setAttribute('stroke', 'green');
+            graph.setAttribute('stroke-width', '1');
+            graph.setAttribute('fill', 'none');
+            //console.log(coords[0]);
+            if (a != 0) {
+                console.log(delta);
+                if (delta > 0) {
+                    var m1 = (-b + Math.sqrt(delta)) / (2 * a);
+                    var m2 = (-b - Math.sqrt(delta)) / (2 * a);
+                    x1.innerHTML = 'X₁: ' + m1;
+                    x2.innerHTML = 'X₂: ' + m2;
+                }
+                if (delta == 0) {
+                    var m0 = -b / (2 * a);
+                    x1.innerHTML = 'X₀: ' + m0;
+                    x2.innerHTML = '';
+                }
+                if (delta < 0) {
+                    x1.innerHTML = 'Brak miejsc zerowych';
+                    x2.innerHTML = '';
+                }
+            }
+            if (a == 0 && b != 0) {
+                m0 = -c / b;
+                x1.innerHTML = 'X₀: ' + m0;
+                x2.innerHTML = '';
+            }
+            if (a == 0 & b == 0) {
+                x1.innerHTML = 'Funkcja stała: ' + c;
+                x2.innerHTML = '';
+            }
+        }
+
+
+
+
+        send.addEventListener('click', calculate);
+
+    </script>
+</body>
+
+</html>
