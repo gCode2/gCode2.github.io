@@ -128,11 +128,11 @@
                 b = parseFloat(document.querySelector('.b').value),
                 c = parseFloat(document.querySelector('.c').value),
                 other = document.querySelector('.other').value,
-                points = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5],
+                points = [],
                 coords = [],
                 x1 = document.querySelector('.x1'),
                 x2 = document.querySelector('.x2');
-            console.log(x1);
+            
             if (a == null || isNaN(a)) {
                 a = 0;
             }
@@ -143,24 +143,27 @@
                 c = 0;
             }
             var delta = Math.pow(b, 2) - (4 * a * c);
+            for (var i = -5; i <= 5; i++) {
+                points.push(i);
+            }
             for (var i = 0; i < points.length; i++) {
                 var y = -(((a * Math.pow(points[i], 2)) + (b * points[i]) - 5));
                 coords.push(y);
-                console.log(y);
+                //console.log(y);
                 //console.log(coords);
                 //console.log(point.x + ' ' + point.y);
             }
             if (a !== 0) {
-                graph.setAttribute('d', "M 0 " + (coords[0] * 50 - c * 50) + ' Q 250 ' + ((-coords[0] * 50 - c * 50) + 250 * b + 500) + ' 500 ' + (coords[10] * 50 - c * 50) + 'Z');
+                graph.setAttribute('d', "M 0 " + (coords[0] * 50 - c * 50) + ' Q 250 ' + ((-coords[0] * 50 - c * 50) + 250 * b + 500) + ' 500 ' + (coords[coords.length - 1] * 50 - c * 50) + 'Z');
             } else {
-                graph.setAttribute('d', "M 0 " + (coords[0] * 50 - c * 50) + ' L500 ' + (coords[10] * 50 - c * 50) + 'Z');
+                graph.setAttribute('d', "M 0 " + (coords[0] * 50 - c * 50) + ' L500 ' + (coords[coords.length - 1] * 50 - c * 50) + 'Z');
             }
             graph.setAttribute('stroke', 'green');
             graph.setAttribute('stroke-width', '1');
             graph.setAttribute('fill', 'none');
             //console.log(coords[0]);
             if (a != 0) {
-                console.log(delta);
+                //console.log(delta);
                 if (delta > 0) {
                     var m1 = (-b + Math.sqrt(delta)) / (2 * a);
                     var m2 = (-b - Math.sqrt(delta)) / (2 * a);
